@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ALUNOS 10;
-
 int main(void){
     
-    int num_questoes, i, acertos = 0;
+    int num_questoes, i, acertos = 0, porcentagem_aprovados;
+    float nota;
 
     // solicitando o numero de questoes na prova
     printf("Digite o numero de questoes da prova\n");
@@ -28,7 +27,12 @@ int main(void){
         scanf(" %c", &gabarito_correto[i]);
     }
     
-    
+    printf("\nGabarito:\n");
+    for(i=0; i<num_questoes; i++)
+    {
+        printf("Questão %d - %c\n", i+1, gabarito_correto[i]);
+    }
+
     char *gabarito_aluno = (char *)malloc(num_questoes*sizeof(char));
     if (gabarito_aluno == NULL)
     {
@@ -36,21 +40,33 @@ int main(void){
         exit(1);    
     }
     
-    
-    for (i = 0; i < ALUNOS; i++)
+    printf("Gabarito do aluno:\n");
+    for (i = 0; i < 10; i++)
     {
-        printf("Insira a alternativa da questao %d\n", i+1);
+        printf("Insira o gabarito do aluno %d\n", i+1);
         scanf(" %c", &gabarito_aluno[i]);
 
         if (gabarito_aluno[i] == gabarito_correto[i])
         {
             acertos++;
         }       
-    }
-        
-    float nota;
 
-    nota = ((10/num_questoes) * acertos);
+        nota=(acertos*100)/num_questoes;
+
+        if(nota>=60)
+        {
+            porcentagem_aprovados=+1;
+        }
+        
+        printf("Acertos: %d\n", acertos);
+        printf("Nota do aluno %d: %f\n", i+1, nota);
+        printf("\n");
+        
+        acertos=0;
+    }
+    
+    printf("\nPorcentagem de aprovação: %d%%\n", (porcentagem_aprovados*100)/10);
+    free(gabarito_aluno);
 
     return 0;
 }

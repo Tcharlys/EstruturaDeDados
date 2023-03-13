@@ -5,23 +5,19 @@ int main(void){
     FILE *fp;
 
     fp = fopen ("teste.txt", "wt");
-    if (fp == NULL)
-    {
+    if (fp == NULL){
         printf("Erro na abertura do arquivo\n");
         exit(1);
     }
-    else
-    {
+    else{
         printf("O arquivo foi aberto\n...\n");
     }
 
     int fecha = fclose(fp);
-    if (fecha != 0)
-    {
+    if (fecha != 0){
         printf("Nao foi possivel fechar o arquivo\n");
     }
-    else
-    {
+    else{
         printf("Arquivo fechado\n");
     }
 

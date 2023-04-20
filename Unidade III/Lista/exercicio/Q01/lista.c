@@ -15,8 +15,8 @@ Lista *lst_cria(void){
 Lista *lst_insere(Lista *l, int i){
     Lista *novo = (Lista*) malloc(sizeof (Lista));
 
-    novo->info;
-    novo->prox;
+    novo->info = i;
+    novo->prox = l;
 
     return novo;
 }
@@ -36,30 +36,28 @@ int lst_vazia(Lista *l){
         return 0;
 }
 
-Lista * lst_busca(Lista *l, int v){
+Lista *lst_busca(Lista *l, int v){
     Lista *p;
 
-    for (p = l; p != NULL; p = p->prox){
+    for(p = l; p != NULL; p = p->prox){
         if (p->info == v){
             return p;
         }
     }
-    return NULL;
-    
+    return NULL; 
 }
 
 Lista *lst_retira(Lista *l, int v){
     Lista *ant = NULL;
     Lista *p = l;
 
-    while (p != NULL && p->info != v){
+    while(p != NULL && p->info != v){
         ant = p;
         p = p->prox;
     }
     
-    if (p == NULL){
-        return 1;
-    }
+    if (p == NULL)
+        return l;
     if (ant == NULL){
         l = p->prox;
     }
@@ -69,7 +67,7 @@ Lista *lst_retira(Lista *l, int v){
 
     free(p);
 
-    return 1;
+    return l;
 }
 
 void lst_libera(Lista *l){
@@ -83,7 +81,16 @@ void lst_libera(Lista *l){
         p = t;
     }
 }
-int main(){
 
-    return 0;
+int maiores(Lista *l, int n){
+    Lista *p;
+    int i = 0;
+    
+    for (p = l; p != NULL; p = p->prox){
+        if (p->info > n){
+            i++;
+        }
+    }
+
+    printf(" %d Nos maiores que %d", i, n);
 }
